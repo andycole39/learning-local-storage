@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="longLife"></div>
+    
+
+  
+    <script>
+
+let longLife =document.getElementById("longLife");
+console.log(longLife);
+
+let display = localStorage.getItem("andrew");
+
+display=JSON.parse(display);
+
+console.log(display)
+
+let code =`<table>
+            <thead>
+            <tr>
+                <th>fullname</th>
+                <th>lastname</th>
+            </tr>
+            </thead>
+            <tbody>`;
+
+                for(let i = 0; i <display.length;i++){
+
+                    let fullname= display[i].fullname;
+                    let lastname= display[i].lastname;
+                    let id = display[i].id;
+                                        code+=` <tr>
+                    <td>${fullname} </td>
+                    <td>${lastname } </td>
+                    <td> <button onclick = 'removemyUser(${id})'> remove </button>
+                    </tr>`
+                }
+                    code+= `</tbody> </table>`;
+
+                    longLife.innerHTML = code;
+                
+
+
+
+
+
+
+                    function removemyUser(id){
+                        let messageRemove= confirm("Do you want to delete?");
+                        if (messageRemove){
+                            
+                        messageRemove=JSON.parse(localStorage.getItem("andrew"));
+                        for(let i = 0; i < messageRemove.length; i++){
+                            if(messageRemove[i].id == id){
+                                messageRemove.splice(i, 1);
+
+                                localStorage.setItem('andrew', JSON.stringify(messageRemove));
+                                break;
+                            }
+                        }location.reload();
+                        }else{
+                            
+                        }
+            
+
+                    }
+
+    </script>
+</body>
+</html>
